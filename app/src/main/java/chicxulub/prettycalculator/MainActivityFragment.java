@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 /**
@@ -19,15 +18,14 @@ import java.util.ArrayList;
 public class MainActivityFragment extends Fragment {
 
     public static final String TAG = MainActivityFragment.class.getName();
+
     public MainActivityFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
         ArrayList<Button> buttons = getAllNumberButtons(rootView);
         int i = 0;
         TextView outputAlpha = (TextView)rootView.findViewById(R.id.calculatorOutputBottom);
@@ -37,7 +35,6 @@ public class MainActivityFragment extends Fragment {
             i++;
         }
         return rootView;
-
     }
 
     public ArrayList<Button> getAllNumberButtons(View view) {
