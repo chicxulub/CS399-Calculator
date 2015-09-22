@@ -15,8 +15,9 @@ import java.util.ArrayList;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment {
+public class MainActivityFragment extends Fragment implements View.OnClickListener {
 
+    public TextView outputAlpha;
     public static final String TAG = MainActivityFragment.class.getName();
 
     public MainActivityFragment() {
@@ -26,14 +27,21 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        ArrayList<Button> buttons = getAllNumberButtons(rootView);
+
+        // insert numbers into text view
+        ArrayList<Button> numberButtons = getAllNumberButtons(rootView);
         int i = 0;
-        TextView outputAlpha = (TextView)rootView.findViewById(R.id.calculatorOutputBottom);
-        for(Button button: buttons) {
+        outputAlpha = (TextView)rootView.findViewById(R.id.calculatorOutputBottom);
+        for(Button button: numberButtons) {
             // add button onclick listeners
             addNumPadClickListener(button, i, outputAlpha);
             i++;
         }
+
+        // add click events for operations
+        Button b = (Button)rootView.findViewById(R.id.backspace);
+        b.setOnClickListener(this);
+
         return rootView;
     }
 
@@ -56,6 +64,20 @@ public class MainActivityFragment extends Fragment {
                 a.append(String.valueOf(i));
             }
         });
+    }
+
+    public void onClick(View v){
+        switch(v.getId()) {
+            case R.id.backspace:
+                String text = outputAlpha.getText().toString();
+                if(text.length() > 0) {
+                    outputAlpha.setText(text.substring(0, text.length()-1));
+                }
+                break;
+            default:
+                Log.d(TAG, "You clicked a useless button.");
+                break;
+        }
     }
 
 
