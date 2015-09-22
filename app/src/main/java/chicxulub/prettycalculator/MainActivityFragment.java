@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class MainActivityFragment extends Fragment implements View.OnClickListener {
 
-    public TextView outputAlpha;
+    public TextView outputAlpha, outputBeta;
     public static final String TAG = MainActivityFragment.class.getName();
 
     public MainActivityFragment() {
@@ -40,6 +40,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
 
         // add click events for operations
         Button b = (Button)rootView.findViewById(R.id.backspace);
+        Button c = (Button)rootView.findViewById(R.id.clear);
+
+        c.setOnClickListener(this);
         b.setOnClickListener(this);
 
         return rootView;
@@ -67,15 +70,17 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
 
     public void onClick(View v){
+        String text = outputAlpha.getText().toString();
         switch(v.getId()) {
             case R.id.backspace:
-                String text = outputAlpha.getText().toString();
                 if(text.length() > 0) {
-                    outputAlpha.setText(text.substring(0, text.length()-1));
+                    outputAlpha.setText(text.substring(0, text.length() - 1));
                 }
                 break;
-            default:
-                Log.d(TAG, "You clicked a useless button.");
+            case R.id.clear:
+                if(text.length() > 0) {
+                    outputAlpha.setText("");
+                }
                 break;
         }
     }
