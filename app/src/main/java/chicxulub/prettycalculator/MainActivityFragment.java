@@ -1,5 +1,6 @@
 package chicxulub.prettycalculator;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,13 @@ public class MainActivityFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
+        ArrayList<Button> buttons = getAllNumberButtons(rootView);
+        int i = 0;
+        for(Button button: buttons) {
+            // add button onclick listeners
+            addNumPadClickListener(button, i);
+            i++;
+        }
         return rootView;
 
     }
@@ -38,10 +47,16 @@ public class MainActivityFragment extends Fragment {
         return numPad;
     }
 
-    public void addNumPadClickListeners() {
-
+    public void addNumPadClickListener(Button button, int value) {
+        final int i = value;
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity().getApplicationContext(), String.valueOf(i),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    public int getValuePressed() { return 0; }
 
 }
