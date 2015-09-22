@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,9 +30,10 @@ public class MainActivityFragment extends Fragment {
 
         ArrayList<Button> buttons = getAllNumberButtons(rootView);
         int i = 0;
+        TextView outputAlpha = (TextView)rootView.findViewById(R.id.calculatorOutputBottom);
         for(Button button: buttons) {
             // add button onclick listeners
-            addNumPadClickListener(button, i);
+            addNumPadClickListener(button, i, outputAlpha);
             i++;
         }
         return rootView;
@@ -47,13 +49,14 @@ public class MainActivityFragment extends Fragment {
         return numPad;
     }
 
-    public void addNumPadClickListener(Button button, int value) {
+    public void addNumPadClickListener(Button button, int value, TextView appendTo) {
         final int i = value;
+        final TextView a = appendTo;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext(), String.valueOf(i),
-                        Toast.LENGTH_SHORT).show();
+                //Log.d(TAG, String.valueOf(i));
+                a.append(String.valueOf(i));
             }
         });
     }
