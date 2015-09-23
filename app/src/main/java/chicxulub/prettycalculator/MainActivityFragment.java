@@ -142,6 +142,11 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    /*
+    * Parsing code yoinked from http://stackoverflow.com/questions/3422673/evaluating-a-math-expression-given-in-string-form
+    * Written by user Boann http://stackoverflow.com/users/964243/boann
+    * Released to public domain! Thank you!
+    */
     public static double eval(final String str) {
         class Parser {
             int pos = -1, c;
