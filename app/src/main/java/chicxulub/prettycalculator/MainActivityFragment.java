@@ -88,7 +88,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             case R.id.backspace:
                 if(textAlpha.length()>0) {
                     outputAlpha.setText(textAlpha.substring(0, textAlpha.length() - 1));
-                } else {
+                } else if (textBeta.length() > 0) {
                     // start deleting in beta
                     outputBeta.setText(textBeta.substring(0, textBeta.length() - 1));
                 }
