@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="transparent_grey">#50808080</color>
+    <color name="sage">#4CC670</color>
+    <color name="teal">#06717B</color>
+    <color name="gold">#FFDC33</color>
+    <color name="magenta">#E1568C</color>
 </resources>
