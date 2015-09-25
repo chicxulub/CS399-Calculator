@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment implements View.OnClickListener {
-
     public TextView outputAlpha;
     public TextView outputBeta;
     public static final String TAG = MainActivityFragment.class.getName();
@@ -76,6 +75,10 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 //Log.d(TAG, String.valueOf(i));
+                if(outputBeta.getText().toString().contains("=")) {
+                    outputBeta.setText("");
+                    outputAlpha.setText("");
+                }
                 a.append(String.valueOf(i));
             }
         });
@@ -85,6 +88,10 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         String textAlpha = outputAlpha.getText().toString();
         String textBeta = outputBeta.getText().toString();
         String newText = "";
+        if(textBeta.contains("=")) {
+            outputBeta.setText("");
+            textBeta = "";
+        }
         switch(v.getId()) {
             case R.id.backspace:
                 if(textAlpha.length()>0) {
@@ -153,9 +160,9 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             case R.id.equals:
                 if(textAlpha.length()>0) {
                     String toEval = textBeta + textAlpha;
-                    outputBeta.setText(toEval);
+                    outputBeta.setText(toEval + "=");
                     double result = eval(toEval);
-                    outputAlpha.setText(String.valueOf(result));
+                    outputAlpha.setText(String.valueOf((int)result));
                 }
                 break;
         }
