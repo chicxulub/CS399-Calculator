@@ -2,6 +2,7 @@ package chicxulub.prettycalculator;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,12 +27,14 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
         // insert numbers into text view
         ArrayList<Button> numberButtons = getAllNumberButtons(rootView);
         int i = 0;
         outputAlpha = (TextView)rootView.findViewById(R.id.calculatorOutputBottom);
         outputBeta = (TextView)rootView.findViewById(R.id.calculatorOutputTop);
+        // make visible
+        outputAlpha.setMovementMethod(new ScrollingMovementMethod());
+        outputBeta.setMovementMethod(new ScrollingMovementMethod());
 
         for(Button button: numberButtons) {
             // add button onclick listeners
@@ -47,6 +51,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         Button d = (Button)rootView.findViewById(R.id.divide);
         Button e = (Button)rootView.findViewById(R.id.equals);
         Button n = (Button)rootView.findViewById(R.id.changeSign);
+        Button p = (Button)rootView.findViewById(R.id.decimal);
         b.setOnClickListener(this);
         c.setOnClickListener(this);
         a.setOnClickListener(this);
@@ -55,7 +60,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         d.setOnClickListener(this);
         e.setOnClickListener(this);
         n.setOnClickListener(this);
-
+        p.setOnClickListener(this);
         return rootView;
     }
 
@@ -75,7 +80,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 //Log.d(TAG, String.valueOf(i));
-                if(outputBeta.getText().toString().contains("=")) {
+                if(outputBeta.getText().toString().contains("=") || outputAlpha.getText().toString().equals("wow, that's big")) {
                     outputBeta.setText("");
                     outputAlpha.setText("");
                 }
@@ -91,6 +96,11 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         if(textBeta.contains("=")) {
             outputBeta.setText("");
             textBeta = "";
+        }
+        if(textAlpha.equals("wow, that's big")) {
+            outputBeta.setText("");
+            outputAlpha.setText("");
+            textAlpha = "";
         }
         switch(v.getId()) {
             case R.id.backspace:
@@ -157,12 +167,31 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 }
                 outputAlpha.setText(newText);
                 break;
+            case R.id.decimal:
+                if(textAlpha.length()==0){
+                    outputAlpha.setText("0.");
+                } else if (!textAlpha.contains(".")) {
+                    outputAlpha.setText(textAlpha + ".");
+                }
+
+                break;
             case R.id.equals:
                 if(textAlpha.length()>0) {
                     String toEval = textBeta + textAlpha;
                     outputBeta.setText(toEval + "=");
                     double result = eval(toEval);
-                    outputAlpha.setText(String.valueOf((int)result));
+                    if(Double.isInfinite(result)) {
+                        Log.d(TAG, String.valueOf(Double.isInfinite(result)));
+                        outputBeta.setText("");
+                        outputAlpha.setText("wow, that's big");
+                        break;
+                    }
+                    if(result%1 == 0) {
+                        outputAlpha.setText(String.valueOf((int) result));
+                    }
+                    else {
+                        outputAlpha.setText(String.valueOf(result));
+                    }
                 }
                 break;
         }

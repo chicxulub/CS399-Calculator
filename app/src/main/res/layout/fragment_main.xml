@@ -40,7 +40,6 @@
         android:id="@+id/calculatorOutputBottom"
         android:singleLine="true"
         android:ellipsize="none"
-        android:scrollHorizontally="true"
         />
     </TableRow>
 
