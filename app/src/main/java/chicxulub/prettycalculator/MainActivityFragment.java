@@ -1,6 +1,5 @@
 package chicxulub.prettycalculator;
 
-import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
@@ -46,15 +44,18 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         Button c = (Button)rootView.findViewById(R.id.clear);
         Button a = (Button)rootView.findViewById(R.id.add);
         Button s = (Button)rootView.findViewById(R.id.subtract);
-        Button m = (Button)rootView.findViewById(R.id.multiply);
+        Button m = (Button)rootView.findViewById(R.id.mult);
         Button d = (Button)rootView.findViewById(R.id.divide);
-
+        Button e = (Button)rootView.findViewById(R.id.equals);
+        Button n = (Button)rootView.findViewById(R.id.changeSign);
         b.setOnClickListener(this);
         c.setOnClickListener(this);
         a.setOnClickListener(this);
         s.setOnClickListener(this);
         m.setOnClickListener(this);
         d.setOnClickListener(this);
+        e.setOnClickListener(this);
+        n.setOnClickListener(this);
 
         return rootView;
     }
@@ -119,7 +120,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     outputAlpha.setText("");
                 }
                 break;
-            case R.id.multiply:
+            case R.id.mult:
                 if(textAlpha.length()>0) {
                     if (textBeta.length() > 0) {
                         newText = textBeta;
@@ -137,6 +138,24 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     newText += textAlpha + "/";
                     outputBeta.setText(newText);
                     outputAlpha.setText("");
+                }
+                break;
+            case R.id.changeSign:
+                if(textAlpha.length()>0) {
+                    if (!textAlpha.contains("-")) {
+                        newText = "-" + textAlpha;
+                    } else if (textAlpha.contains("-")) {
+                        newText = textAlpha.substring(1,textAlpha.length());
+                    }
+                }
+                outputAlpha.setText(newText);
+                break;
+            case R.id.equals:
+                if(textAlpha.length()>0) {
+                    String toEval = textBeta + textAlpha;
+                    outputBeta.setText(toEval);
+                    double result = eval(toEval);
+                    outputAlpha.setText(String.valueOf(result));
                 }
                 break;
         }
