@@ -18,12 +18,12 @@
         android:layout_width="fill_parent"
         android:fontFamily="sans-serif-light"
         android:padding="8dp"
-        android:textSize="32sp"
+        android:textSize="16sp"
         android:gravity="center_vertical|end"
         android:id="@+id/calculatorOutputTop"
         android:singleLine="true"
         android:ellipsize="none"
-        />
+        android:textColor="@color/white" />
     </TableRow>
 
     <TableRow android:layout_weight="1" android:gravity="center" >
@@ -40,7 +40,8 @@
         android:id="@+id/calculatorOutputBottom"
         android:singleLine="true"
         android:ellipsize="none"
-        />
+        android:textStyle="bold"
+        android:textColor="@color/white" />
     </TableRow>
 
     <TableRow android:layout_weight="1" android:gravity="center" >

@@ -33,8 +33,6 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         outputAlpha = (TextView)rootView.findViewById(R.id.calculatorOutputBottom);
         outputBeta = (TextView)rootView.findViewById(R.id.calculatorOutputTop);
         // make visible
-        outputAlpha.setMovementMethod(new ScrollingMovementMethod());
-        outputBeta.setMovementMethod(new ScrollingMovementMethod());
 
         for(Button button: numberButtons) {
             // add button onclick listeners
