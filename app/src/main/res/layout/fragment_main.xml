@@ -89,7 +89,6 @@
         android:layout_width="fill_parent"
         android:text="back"
         android:id="@+id/backspace"
-        android:layout_span="2"
         android:background="@color/sage"
         android:textSize="32sp"
         android:textColor="@color/teal" />
@@ -99,6 +98,15 @@
         android:layout_width="fill_parent"
         android:text="+/-"
         android:id="@+id/changeSign"
+        android:background="@color/sage"
+        android:textSize="32sp"
+        android:textColor="@color/teal" />
+
+    <Button
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:text="^"
+        android:id="@+id/power"
         android:background="@color/sage"
         android:textSize="32sp"
         android:textColor="@color/teal" />

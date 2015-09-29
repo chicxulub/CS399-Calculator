@@ -51,6 +51,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         Button e = (Button)rootView.findViewById(R.id.equals);
         Button n = (Button)rootView.findViewById(R.id.changeSign);
         Button p = (Button)rootView.findViewById(R.id.decimal);
+        Button po = (Button)rootView.findViewById(R.id.power);
         Button mc = (Button)rootView.findViewById(R.id.mclear);
         Button mg = (Button)rootView.findViewById(R.id.mget);
         Button ms = (Button)rootView.findViewById(R.id.mstore);
@@ -63,6 +64,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         e.setOnClickListener(this);
         n.setOnClickListener(this);
         p.setOnClickListener(this);
+        po.setOnClickListener(this);
         mc.setOnClickListener(this);
         mg.setOnClickListener(this);
         ms.setOnClickListener(this);
@@ -159,6 +161,16 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                         newText = textBeta;
                     }
                     newText += textAlpha + "/";
+                    outputBeta.setText(newText);
+                    outputAlpha.setText("");
+                }
+                break;
+            case R.id.power:
+                if(textAlpha.length()>0) {
+                    if (textBeta.length() > 0) {
+                        newText = textBeta;
+                    }
+                    newText += textAlpha + "^";
                     outputBeta.setText(newText);
                     outputAlpha.setText("");
                 }
