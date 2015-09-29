@@ -83,7 +83,6 @@
         android:text="1"
         android:id="@+id/num1"
         android:background="@color/gold"
-
         android:textSize="32sp"
         android:textColor="@color/teal" />
 
@@ -93,7 +92,6 @@
         android:text="2"
         android:id="@+id/num2"
         android:background="@color/gold"
-
         android:textSize="32sp"
         android:textColor="@color/teal" />
 
