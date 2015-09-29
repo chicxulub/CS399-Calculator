@@ -3,6 +3,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="@color/teal"
+    android:hapticFeedbackEnabled="true"
     >
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"

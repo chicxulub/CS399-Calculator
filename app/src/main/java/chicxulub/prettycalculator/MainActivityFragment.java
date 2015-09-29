@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         int i = 0;
         outputAlpha = (TextView)rootView.findViewById(R.id.calculatorOutputBottom);
         outputBeta = (TextView)rootView.findViewById(R.id.calculatorOutputTop);
+
         // make visible
 
         for(Button button: numberButtons) {
@@ -72,11 +74,13 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
 
     public void addNumPadClickListener(Button button, int value, TextView appendTo) {
+
         final int i = value;
         final TextView a = appendTo;
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 //Log.d(TAG, String.valueOf(i));
                 if(outputBeta.getText().toString().contains("=") || outputAlpha.getText().toString().equals("wow, that's big")) {
                     outputBeta.setText("");
@@ -88,6 +92,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     }
 
     public void onClick(View v){
+        v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
         String textAlpha = outputAlpha.getText().toString();
         String textBeta = outputBeta.getText().toString();
         String newText = "";
