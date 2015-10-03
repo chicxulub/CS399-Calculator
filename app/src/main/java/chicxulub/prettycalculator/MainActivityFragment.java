@@ -18,6 +18,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
     public TextView outputAlpha;
     public TextView outputBeta;
     public static final String TAG = MainActivityFragment.class.getName();
+    public String savedNum = "";
 
     public MainActivityFragment() {
     }
@@ -50,6 +51,10 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         Button e = (Button)rootView.findViewById(R.id.equals);
         Button n = (Button)rootView.findViewById(R.id.changeSign);
         Button p = (Button)rootView.findViewById(R.id.decimal);
+        Button po = (Button)rootView.findViewById(R.id.power);
+        Button mc = (Button)rootView.findViewById(R.id.mclear);
+        Button mg = (Button)rootView.findViewById(R.id.mget);
+        Button ms = (Button)rootView.findViewById(R.id.mstore);
         b.setOnClickListener(this);
         c.setOnClickListener(this);
         a.setOnClickListener(this);
@@ -59,6 +64,10 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         e.setOnClickListener(this);
         n.setOnClickListener(this);
         p.setOnClickListener(this);
+        po.setOnClickListener(this);
+        mc.setOnClickListener(this);
+        mg.setOnClickListener(this);
+        ms.setOnClickListener(this);
         return rootView;
     }
 
@@ -94,6 +103,7 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
         String textAlpha = outputAlpha.getText().toString();
         String textBeta = outputBeta.getText().toString();
         String newText = "";
+
         if(textBeta.contains("=")) {
             outputBeta.setText("");
             textBeta = "";
@@ -158,6 +168,16 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                     outputAlpha.setText("");
                 }
                 break;
+            case R.id.power:
+                if(textAlpha.length()>0) {
+                    if (textBeta.length() > 0) {
+                        newText = textBeta;
+                    }
+                    newText += textAlpha + "^";
+                    outputBeta.setText(newText);
+                    outputAlpha.setText("");
+                }
+                break;
             case R.id.changeSign:
                 if(textAlpha.length()>0) {
                     if (!textAlpha.contains("-")) {
@@ -174,7 +194,15 @@ public class MainActivityFragment extends Fragment implements View.OnClickListen
                 } else if (!textAlpha.contains(".")) {
                     outputAlpha.setText(textAlpha + ".");
                 }
-
+                break;
+            case R.id.mclear:
+                savedNum = "";
+                break;
+            case R.id.mget:
+                outputAlpha.setText(savedNum);
+                break;
+            case R.id.mstore:
+                savedNum = textAlpha;
                 break;
             case R.id.equals:
                 if(textAlpha.length()>0) {
