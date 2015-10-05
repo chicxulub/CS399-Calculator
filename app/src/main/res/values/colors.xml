@@ -2,6 +2,8 @@
 <resources>
     <color name="transparent_grey">#50808080</color>
     <color name="sage">#4CC670</color>
+    <color name="lightsage">#4CC690</color>
+    <color name="black">#000</color>
     <color name="teal">#06717B</color>
     <color name="gold">#FFDC33</color>
     <color name="magenta">#E1568C</color>
